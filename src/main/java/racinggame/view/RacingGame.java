@@ -2,16 +2,19 @@ package racinggame.view;
 
 import nextstep.utils.Console;
 import racinggame.constant.Messages;
+import racinggame.model.AttemptCount;
 import racinggame.model.RacingCar;
 import racinggame.model.RacingCars;
 
 public class RacingGame implements Game {
 
     private final RacingCars racingCars = new RacingCars();
+    private final AttemptCount attemptCount = new AttemptCount();
 
     @Override
     public void start() {
         initRacingCars();
+        initAttemptCount();
     }
 
     private void initRacingCars() {
@@ -29,6 +32,16 @@ public class RacingGame implements Game {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             initRacingCars();
+        }
+    }
+
+    private void initAttemptCount() {
+        try {
+            System.out.println(Messages.READ_ATTEMPT_COUNT);
+            attemptCount.setCount(Console.readLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            initAttemptCount();
         }
     }
 }
