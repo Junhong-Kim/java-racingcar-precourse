@@ -3,7 +3,7 @@ package racinggame.model;
 import nextstep.utils.Randoms;
 import racinggame.constant.Messages;
 
-public class RacingCar {
+public class RacingCar implements Comparable<RacingCar> {
 
     public static final int MAX_NAME_LENGTH = 5;
     private static final int MAX_RANDOM_NUMBER = 9;
@@ -32,11 +32,20 @@ public class RacingCar {
         return name;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     public void play() {
         int pickedNumber = Randoms.pickNumberInRange(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
         if (pickedNumber >= MOVE_CONDITION_NUMBER) {
             position++;
         }
+        System.out.println(this);
+    }
+
+    public boolean isWinner(int winnerPosition) {
+        return position == winnerPosition;
     }
 
     @Override
@@ -46,5 +55,10 @@ public class RacingCar {
             stringBuilder.append(MOVE_SIGN);
         }
         return String.format("%s : %s", name, stringBuilder);
+    }
+
+    @Override
+    public int compareTo(RacingCar o) {
+        return Integer.compare(this.position, o.position);
     }
 }

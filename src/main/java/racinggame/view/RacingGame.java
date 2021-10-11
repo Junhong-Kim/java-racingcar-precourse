@@ -5,6 +5,7 @@ import racinggame.constant.Messages;
 import racinggame.model.AttemptCount;
 import racinggame.model.RacingCar;
 import racinggame.model.RacingCars;
+import racinggame.model.Winners;
 
 public class RacingGame implements Game {
 
@@ -16,21 +17,20 @@ public class RacingGame implements Game {
         initRacingCars();
         initAttemptCount();
         play();
+        result();
+    }
+
+    private void result() {
+        Winners winners = racingCars.getWinners();
+        System.out.println(winners);
     }
 
     private void play() {
         System.out.println(Messages.EXECUTION_RESULT);
         for (int i = 0; i < attemptCount.getCount(); i++) {
-            racing();
+            racingCars.racing();
+            System.out.println();
         }
-    }
-
-    private void racing() {
-        for (RacingCar racingCar : racingCars.getRacingCarList()) {
-            racingCar.play();
-            System.out.println(racingCar);
-        }
-        System.out.println();
     }
 
     private void initRacingCars() {

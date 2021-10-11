@@ -1,6 +1,7 @@
 package racinggame.model;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import racinggame.constant.Messages;
@@ -42,5 +43,29 @@ class RacingCarTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new RacingCar(name))
                 .withMessageContaining(Messages.EXCEED_RACING_CAR_NAME_LENGTH);
+    }
+
+    @Test
+    @DisplayName("isWinner true 테스트")
+    void racingCar_isWinner_trueTest() {
+        // given
+        RacingCar racingCar = new RacingCar("test");
+        int winnerPosition = 0;
+
+        // when
+        // then
+        assertThat(racingCar.isWinner(winnerPosition)).isTrue();
+    }
+
+    @Test
+    @DisplayName("isWinner false 테스트")
+    void racingCar_isWinner_falseTest() {
+        // given
+        RacingCar racingCar = new RacingCar("test");
+        int winnerPosition = 1;
+
+        // when
+        // then
+        assertThat(racingCar.isWinner(winnerPosition)).isFalse();
     }
 }

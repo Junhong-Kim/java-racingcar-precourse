@@ -18,4 +18,8 @@ public class Messages {
             "[ERROR] 자동차 이름은 %d자 이하만 가능합니다.", RacingCar.MAX_NAME_LENGTH);
     public static final String ATTEMPT_COUNT_MUST_BE_POSITIVE = "[ERROR] 시도할 회수는 1이상 이어야합니다.";
     public static final String ATTEMPT_COUNT_IS_NOT_NUMBER = "[ERROR] 시도할 회수가 숫자가 아닙니다.";
+
+    public static String getRacingGameResult(String winners) {
+        return String.format("최종 우승자는 %s 입니다.", winners);
+    }
 }
