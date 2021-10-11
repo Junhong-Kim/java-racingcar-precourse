@@ -3,61 +3,41 @@ package racinggame.view;
 import nextstep.utils.Console;
 import racinggame.constant.Messages;
 import racinggame.model.AttemptCount;
-import racinggame.model.RacingCar;
 import racinggame.model.RacingCars;
-import racinggame.model.Winners;
 
 public class RacingGame implements Game {
 
-    private final RacingCars racingCars = new RacingCars();
-    private final AttemptCount attemptCount = new AttemptCount();
-
     @Override
     public void start() {
-        initRacingCars();
-        initAttemptCount();
-        play();
-        result();
+        RacingCars racingCars = getRacingCars();
+        AttemptCount attemptCount = getAttemptCount();
+        racingCars.play(attemptCount);
+
+        System.out.println(racingCars.getWinners());
     }
 
-    private void result() {
-        Winners winners = racingCars.getWinners();
-        System.out.println(winners);
-    }
-
-    private void play() {
-        System.out.println(Messages.EXECUTION_RESULT);
-        for (int i = 0; i < attemptCount.getCount(); i++) {
-            racingCars.racing();
-            System.out.println();
-        }
-    }
-
-    private void initRacingCars() {
-        racingCars.clearRacingCars();
+    private RacingCars getRacingCars() {
+        RacingCars racingCars = new RacingCars();
         System.out.println(Messages.READ_RACING_CARS);
-        for (String name : Console.readLine().split(",")) {
-            addRacingCar(name);
-        }
-    }
-
-    private void addRacingCar(String name) {
         try {
-            RacingCar racingCar = new RacingCar(name);
-            racingCars.addRacingCar(racingCar);
+            String[] names = Console.readLine().split(",");
+            racingCars.addRacingCar(names);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            initRacingCars();
+            return getRacingCars();
         }
+        return racingCars;
     }
 
-    private void initAttemptCount() {
+    private AttemptCount getAttemptCount() {
+        AttemptCount attemptCount = new AttemptCount();
+        System.out.println(Messages.READ_ATTEMPT_COUNT);
         try {
-            System.out.println(Messages.READ_ATTEMPT_COUNT);
             attemptCount.setCount(Console.readLine());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            initAttemptCount();
+            return getAttemptCount();
         }
+        return attemptCount;
     }
 }

@@ -8,6 +8,7 @@ import racinggame.constant.Messages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 class RacingCarTest {
 
@@ -19,6 +20,17 @@ class RacingCarTest {
         // when
         // then
         assertThat(new RacingCar(name)).isInstanceOf(RacingCar.class);
+    }
+
+    @Test
+    @DisplayName("자동차 이름 null 체크 테스트")
+    void racingCar_nullName_test() {
+        // given
+        // when
+        // then
+        assertThatNullPointerException()
+                .isThrownBy(() -> new RacingCar(null))
+                .withMessage(Messages.RACING_CAR_NAME_CAN_NOT_BE_NULL);
     }
 
     @ParameterizedTest

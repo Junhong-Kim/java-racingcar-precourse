@@ -5,31 +5,24 @@ import racinggame.constant.Messages;
 
 public class RacingCar implements Comparable<RacingCar> {
 
-    public static final int MAX_NAME_LENGTH = 5;
     private static final int MAX_RANDOM_NUMBER = 9;
     private static final int MIN_RANDOM_NUMBER = 0;
     private static final int MOVE_CONDITION_NUMBER = 4;
     private static final String MOVE_SIGN = "-";
 
-    private final String name;
+    private final RacingCarName racingCarName;
 
     private int position = 0;
 
     public RacingCar(String name) {
-        String trimName = name.trim();
-
-        if (trimName.isEmpty())
-            throw new IllegalArgumentException(Messages.RACING_CAR_NAME_CAN_NOT_BE_BLANK);
-
-        if (trimName.length() > MAX_NAME_LENGTH)
-            throw new IllegalArgumentException(String.format(
-                    "%s(%s)", Messages.EXCEED_RACING_CAR_NAME_LENGTH, trimName));
-
-        this.name = name;
+        if (name == null) {
+            throw new NullPointerException(Messages.RACING_CAR_NAME_CAN_NOT_BE_NULL);
+        }
+        racingCarName = new RacingCarName(name.trim());
     }
 
-    public String getName() {
-        return name;
+    public RacingCarName getRacingCarName() {
+        return racingCarName;
     }
 
     public int getPosition() {
@@ -54,7 +47,7 @@ public class RacingCar implements Comparable<RacingCar> {
         for (int i = 0; i < position; i++) {
             stringBuilder.append(MOVE_SIGN);
         }
-        return String.format("%s : %s", name, stringBuilder);
+        return String.format("%s : %s", racingCarName.getName(), stringBuilder);
     }
 
     @Override

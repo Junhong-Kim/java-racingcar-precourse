@@ -1,5 +1,6 @@
 package racinggame.model;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,10 @@ class RacingCarsTest {
     @DisplayName("addRacingCar 테스트")
     void addRacingCar_Test() {
         // given
-        RacingCar racingCar = new RacingCar("test");
+        String[] names = Arrays.array("test");
 
         // when
-        racingCars.addRacingCar(racingCar);
+        racingCars.addRacingCar(names);
 
         // then
         assertThat(racingCars.getRacingCarList().size()).isOne();
@@ -38,20 +39,6 @@ class RacingCarsTest {
         // then
         assertThatNullPointerException()
                 .isThrownBy(() -> racingCars.addRacingCar(null))
-                .withMessage(Messages.RACING_CAR_CAN_NOT_BE_NULL);
-    }
-
-    @Test
-    @DisplayName("clearRacingCars 테스트")
-    void clearRacingCars_test() {
-        // given
-        RacingCar racingCar = new RacingCar("test");
-
-        // when
-        racingCars.addRacingCar(racingCar);
-        racingCars.clearRacingCars();
-
-        // then
-        assertThat(racingCars.getRacingCarList().size()).isZero();
+                .withMessage(Messages.RACING_CAR_NAME_CAN_NOT_BE_NULL);
     }
 }

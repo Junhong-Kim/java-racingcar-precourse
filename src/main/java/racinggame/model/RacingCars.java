@@ -14,9 +14,11 @@ public class RacingCars {
         return racingCarList;
     }
 
-    public void clearRacingCars() {
-        if (!racingCarList.isEmpty()) {
-            racingCarList.clear();
+    public void play(AttemptCount attemptCount) {
+        System.out.println(Messages.EXECUTION_RESULT);
+        for (int i = 0; i < attemptCount.getCount(); i++) {
+            racing();
+            System.out.println();
         }
     }
 
@@ -26,7 +28,16 @@ public class RacingCars {
         }
     }
 
-    public void addRacingCar(RacingCar racingCar) {
+    public void addRacingCar(String[] names) {
+        if (names == null) {
+            throw new NullPointerException(Messages.RACING_CAR_NAME_CAN_NOT_BE_NULL);
+        }
+        for (String name : names) {
+            addRacingCar(new RacingCar(name));
+        }
+    }
+
+    private void addRacingCar(RacingCar racingCar) {
         if (racingCar == null) {
             throw new NullPointerException(Messages.RACING_CAR_CAN_NOT_BE_NULL);
         }

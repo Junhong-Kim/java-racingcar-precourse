@@ -25,7 +25,7 @@ public class Winners {
     public String toString() {
         List<String> winnerNameList = new ArrayList<>();
         for (RacingCar racingCar : winnerList) {
-            winnerNameList.add(racingCar.getName());
+            winnerNameList.add(racingCar.getRacingCarName().getName());
         }
         return Messages.getRacingGameResult(String.join(",", winnerNameList));
     }
