@@ -15,6 +15,22 @@ public class RacingGame implements Game {
     public void start() {
         initRacingCars();
         initAttemptCount();
+        play();
+    }
+
+    private void play() {
+        System.out.println(Messages.EXECUTION_RESULT);
+        for (int i = 0; i < attemptCount.getCount(); i++) {
+            racing();
+        }
+    }
+
+    private void racing() {
+        for (RacingCar racingCar : racingCars.getRacingCarList()) {
+            racingCar.play();
+            System.out.println(racingCar);
+        }
+        System.out.println();
     }
 
     private void initRacingCars() {
